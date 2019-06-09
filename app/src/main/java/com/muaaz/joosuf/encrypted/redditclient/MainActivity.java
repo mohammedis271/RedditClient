@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 //        ArrayList<Post> posts = rssToPostParser.getPosts();
 
         RSSToFrontPageParser rssToFrontPageParser = new RSSToFrontPageParser(MainActivity.this);
-        rssToFrontPageParser.run("best");
+        rssToFrontPageParser.run("top");
 
     }
 }
