@@ -1,4 +1,4 @@
-package com.muaaz.joosuf.encrypted.redditclient.RSSHandler.SubReddit.XMLTAGS;
+package com.muaaz.joosuf.encrypted.redditclient.RSSHandler.XMLTags;
 /**
  * Root of RSS document holds majority of the subreddit information.
  * Created by: Muaaz Joosuf
@@ -15,13 +15,13 @@ import java.util.List;
 @Root(name = "feed", strict = false)
 public class Feed implements Serializable{
 
-    @Element(name = "icon")
+    @Element(name = "icon",required = false)
     private String icon;
 
     @Element(name = "id")
     private String id;
 
-    @Element(name = "logo")
+    @Element(name = "logo",required = false)
     private String logo;
 
     @Element(name = "title")
@@ -30,7 +30,7 @@ public class Feed implements Serializable{
     @Element(name = "updated")
     private String updated;
 
-    @Element(name = "subtitle")
+    @Element(name = "subtitle",required = false)
     private String subtitle;
 
     @ElementList(inline = true, name = "entry")
@@ -94,6 +94,6 @@ public class Feed implements Serializable{
 
     @Override
     public String toString() {
-        return "Feed: \n [Entrys: \n" + entries +"]";
+        return "Feed: \n [Entries: \n" + entries +"]";
     }
 }

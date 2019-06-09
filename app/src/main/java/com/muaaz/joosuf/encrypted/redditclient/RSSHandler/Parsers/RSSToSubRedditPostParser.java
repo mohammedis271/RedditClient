@@ -1,4 +1,4 @@
-package com.muaaz.joosuf.encrypted.redditclient.RSSHandler.Async;
+package com.muaaz.joosuf.encrypted.redditclient.RSSHandler.Parsers;
 /**
  * Class created to handle Async Downloads. Makes use of Runnable as well as Retrofit to
  * retrieve RSS files from sub reddit and return an Arraylist of Post Objects ready for
@@ -12,11 +12,10 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.muaaz.joosuf.encrypted.redditclient.RSSHandler.SubReddit.Post;
-import com.muaaz.joosuf.encrypted.redditclient.RSSHandler.SubReddit.XMLTAGS.Entry;
-import com.muaaz.joosuf.encrypted.redditclient.RSSHandler.SubReddit.XMLTAGS.Feed;
-import com.muaaz.joosuf.encrypted.redditclient.RSSHandler.XMLHandler.ExtractXML;
-import com.muaaz.joosuf.encrypted.redditclient.RSSHandler.XMLHandler.XMLHandler;
+
+import com.muaaz.joosuf.encrypted.redditclient.RSSHandler.Post;
+import com.muaaz.joosuf.encrypted.redditclient.RSSHandler.XMLTags.Entry;
+import com.muaaz.joosuf.encrypted.redditclient.RSSHandler.XMLTags.Feed;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +26,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
-public class RSSToPostParser implements Runnable{
-    private static final String TAG = "MainActivity";
+public class RSSToSubRedditPostParser {
+    private static final String TAG = "RSSToSubReddit";
     private static final String BASE_URL = "https://www.reddit.com/r/";
     private ArrayList<Post> posts;
-    Context context;
-    public RSSToPostParser(Context context){
+    private Context context;
+    public RSSToSubRedditPostParser(Context context){
         this.context = context;
     }
 
@@ -40,15 +39,15 @@ public class RSSToPostParser implements Runnable{
         return posts;
     }
 
-    @Override
-    public void run() {
+   public void run(String feed_name) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .build();
 
-        XMLHandler xmlHandler = retrofit.create(XMLHandler.class);
-        Call<Feed> call = xmlHandler.getFeed();
+
+        XMLHandler xmlHandlerSubReddit = retrofit.create(XMLHandler.class);
+        Call<Feed> call = xmlHandlerSubReddit.getSubRedditFeed(feed_name);
 
         call.enqueue(new Callback<Feed>() {
             @Override

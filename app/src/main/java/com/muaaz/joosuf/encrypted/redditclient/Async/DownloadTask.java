@@ -1,4 +1,4 @@
-package com.muaaz.joosuf.encrypted.redditclient.RSSHandler.Async;
+package com.muaaz.joosuf.encrypted.redditclient.Async;
 /**
  * General Async download task used for pulling html/ rss/ Json or any information from a given link.
  * Created by: Muaaz Joosuf

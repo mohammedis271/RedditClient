@@ -1,4 +1,4 @@
-package com.muaaz.joosuf.encrypted.redditclient.RSSHandler.SubReddit;
+package com.muaaz.joosuf.encrypted.redditclient.RSSHandler;
 /**
  * Class created to hold scraped RSS data for users who are not logged in.
  * Created by: Muaaz Joosuf

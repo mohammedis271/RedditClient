@@ -1,4 +1,4 @@
-package com.muaaz.joosuf.encrypted.redditclient.RSSHandler.SubReddit.XMLTAGS;
+package com.muaaz.joosuf.encrypted.redditclient.RSSHandler.XMLTags;
 /**
  * Direct Child to feed within RSS document.
  * Created by: Muaaz Joosuf
