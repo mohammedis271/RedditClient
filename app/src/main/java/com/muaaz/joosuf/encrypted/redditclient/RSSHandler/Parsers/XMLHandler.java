@@ -30,5 +30,14 @@ public interface XMLHandler {
      */
     @GET("{type}/.rss")
     Call<Feed>
-    getFrontPageFeed(@Path("type")String type);
+    getFrontPageFeed(@Path("type") String type);
+
+    @GET("{user_handle}/.rss")
+    Call<Feed>
+    getUserPageFeed(@Path("user_handle") String user_handle);
+
+    @GET("{post_URL}/.rss")
+    Call<Feed>
+    getCommentsPageFeed(@Path("post_URL") String post_url);
+
 }

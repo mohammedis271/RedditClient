@@ -30,8 +30,8 @@ public class RSSToFrontPageParser {
 
     private static final String TAG = "RSSToFrontPage";
     private static final String BASE_URL = "https://www.reddit.com/";
-    private ArrayList<Post> posts;
-    Context context;
+    private final ArrayList<Post> posts = new ArrayList<>();
+    private Context context;
     public RSSToFrontPageParser(Context context){
         this.context = context;
     }
@@ -47,15 +47,14 @@ public class RSSToFrontPageParser {
                 .build();
 
 
-        XMLHandler xmlHandlerSubReddit = retrofit.create(XMLHandler.class);
-        Call<Feed> call = xmlHandlerSubReddit.getFrontPageFeed(type);
+        XMLHandler xmlHandler = retrofit.create(XMLHandler.class);
+        Call<Feed> call = xmlHandler.getFrontPageFeed(type);
 
         call.enqueue(new Callback<Feed>() {
             @Override
             public void onResponse(Call<Feed> call, Response<Feed> response) {
                 //Log.d(TAG,"onResponse: feed " +response.body().getEntries());
 
-                posts = new ArrayList<>();
                 List<Entry> entries = response.body().getEntries();
                 Log.d(TAG, "onResponse: Server Response" + entries.get(1).getContent());
                 for (int i = 0 ; i<entries.size();i++){

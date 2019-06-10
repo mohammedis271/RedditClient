@@ -26,12 +26,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
-public class RSSToSubRedditPostParser {
+public class RSSToSubRedditPageParser {
     private static final String TAG = "RSSToSubReddit";
     private static final String BASE_URL = "https://www.reddit.com/r/";
-    private ArrayList<Post> posts;
+    private final ArrayList<Post> posts = new ArrayList<>();
     private Context context;
-    public RSSToSubRedditPostParser(Context context){
+    public RSSToSubRedditPageParser(Context context){
         this.context = context;
     }
 
@@ -54,7 +54,6 @@ public class RSSToSubRedditPostParser {
             public void onResponse(Call<Feed> call, Response<Feed> response) {
                 //Log.d(TAG,"onResponse: feed " +response.body().getEntries());
 
-                posts = new ArrayList<>();
                 List<Entry> entries = response.body().getEntries();
 //                Log.d(TAG, "onResponse: Server Response" + entries.get(1).getContent());
                 for (int i = 0 ; i<entries.size();i++){
