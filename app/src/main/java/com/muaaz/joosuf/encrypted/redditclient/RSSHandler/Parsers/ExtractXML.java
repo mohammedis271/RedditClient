@@ -7,6 +7,8 @@ package com.muaaz.joosuf.encrypted.redditclient.RSSHandler.Parsers;
  * Date: 09/06/2019
  */
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 

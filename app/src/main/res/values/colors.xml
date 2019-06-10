@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="black">#000000</color>
+    <color name="dark_gray">#595959</color>
+    <color name="off_white">#FBF9F9</color>
+    <color name="white">#FFFFFF</color>
+    <color name="fab_menu_color">#515A5A</color>
+    <color name="fab_button_option_1">#5F6A6A</color>
+    <color name="silver_white">#F2F3F4</color>
 </resources>

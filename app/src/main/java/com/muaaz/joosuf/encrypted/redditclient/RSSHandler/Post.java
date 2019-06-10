@@ -13,12 +13,39 @@ public class Post {
     private String postURL; //to be used later for linking
     private String thumbnailURL;
 
+    public Post(){}
     public Post(String title, String author, String dateUpdated, String postURL, String thumbnailURL) {
-        this.title = title;
-        this.author = author;
-        this.dateUpdated = dateUpdated;
-        this.postURL = postURL;
-        this.thumbnailURL = thumbnailURL;
+        if(title == null){
+            this.title = "";
+        }else{
+            this.title = title;
+
+        }
+        if(author == null){
+            this.author = "";
+        }else {
+            this.author = author;
+
+        }
+        if(dateUpdated == null){
+            this.dateUpdated = "";
+        }else{
+            this.dateUpdated = dateUpdated;
+
+        }
+
+        if(postURL == null){
+            this.postURL = "";
+        }else{
+            this.postURL = postURL;
+
+        }
+        if(thumbnailURL == null){
+            this.thumbnailURL = "";
+        }else{
+            this.thumbnailURL = thumbnailURL;
+        }
+
     }
 
 
