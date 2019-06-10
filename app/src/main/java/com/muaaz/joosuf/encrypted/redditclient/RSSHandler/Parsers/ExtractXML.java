@@ -1,4 +1,4 @@
-package com.muaaz.joosuf.encrypted.redditclient.RSSHandler.XMLHandler;
+package com.muaaz.joosuf.encrypted.redditclient.RSSHandler.Parsers;
 /**
  * Custom built XML extractor for content side of posts.
  * Filters out any generic text for links within diamond <></> tags

@@ -1,4 +1,4 @@
-package com.muaaz.joosuf.encrypted.redditclient.RSSHandler.SubReddit.XMLTAGS;
+package com.muaaz.joosuf.encrypted.redditclient.RSSHandler.XMLTags;
 /**
  * final child of entry within RSS document.
  * Created by: Muaaz Joosuf
