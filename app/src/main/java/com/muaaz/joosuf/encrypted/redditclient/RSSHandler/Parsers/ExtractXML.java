@@ -15,30 +15,48 @@ import java.util.List;
 public class ExtractXML {
     private static final String TAG = "ExtractXML";
 
-    private String tag;
+    private String startTag;
     private String xml;
+    private String endTag;
 
-    public ExtractXML(String xml, String tag) {
-        this.tag = tag;
+    public ExtractXML(String xml, String startTag) {
+        this.startTag = startTag;
         this.xml = xml;
     }
 
-    public List<String> start(){
+    public ExtractXML(String xml, String startTag, String endTag) {
+        this.startTag = startTag;
+        this.xml = xml;
+        this.endTag = endTag;
+    }
+
+    public List<String> start() {
         List<String> result = new ArrayList<>();
-//        Log.d(TAG,xml);
-        String[] splitXML = xml.split(tag + "\"");
+        String[] splitXML;
+        String marker;
+
+
+        if (endTag == null) {
+            marker = "\"";
+            splitXML = xml.split(startTag + marker);
+        } else {
+            marker = endTag;
+            splitXML = xml.split(startTag);
+        }
+
         int count = splitXML.length;
 
-        for( int i = 1; i < count; i++){
+        for (int i = 1; i < count; i++) {
             String temp = splitXML[i];
-            int index = temp.indexOf("\"");
-//            Log.d(TAG, "start: index: " + index);
-//            Log.d(TAG, "start: extracted: " + temp);
+            int index = temp.indexOf(marker);
+            Log.d(TAG, "start: index: " + index);
+            Log.d(TAG, "start: extracted: " + temp);
 
-            temp = temp.substring(0,index);
-//            Log.d(TAG, "start: snipped: " + temp);
+            temp = temp.substring(0, index);
+            Log.d(TAG, "start: snipped: " + temp);
             result.add(temp);
         }
 
         return result;
-    }}
+    }
+}

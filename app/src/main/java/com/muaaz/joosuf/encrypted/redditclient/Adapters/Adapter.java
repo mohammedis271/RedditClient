@@ -1,6 +1,5 @@
-package com.muaaz.joosuf.encrypted.redditclient;
+package com.muaaz.joosuf.encrypted.redditclient.Adapters;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.muaaz.joosuf.encrypted.redditclient.Async.ImageDownloadTask;
+import com.muaaz.joosuf.encrypted.redditclient.Utils.Async.ImageDownloadTask;
+import com.muaaz.joosuf.encrypted.redditclient.R;
 import com.muaaz.joosuf.encrypted.redditclient.RSSHandler.Post;
 
 import java.util.List;
@@ -19,6 +18,7 @@ import java.util.concurrent.ExecutionException;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> {
     private static final String TAG = "Adapter";
+
 
     private List<Post> posts;
 
@@ -32,9 +32,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> {
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.post_layout,viewGroup,false);
-        CustomViewHolder viewHolder = new CustomViewHolder(view);
-        view.setOnClickListener(v -> Toast.makeText(view.getContext(), Integer.toString(i), Toast.LENGTH_SHORT).show());
-        return viewHolder;
+        return new CustomViewHolder(view);
     }
 
     @Override

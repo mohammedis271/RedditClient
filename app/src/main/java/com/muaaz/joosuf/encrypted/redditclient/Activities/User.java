@@ -1,13 +1,22 @@
-package com.muaaz.joosuf.encrypted.redditclient.RSSHandler.Parsers;
+package com.muaaz.joosuf.encrypted.redditclient.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.muaaz.joosuf.encrypted.redditclient.Adapters.Adapter;
+import com.muaaz.joosuf.encrypted.redditclient.R;
+import com.muaaz.joosuf.encrypted.redditclient.RSSHandler.Parsers.ExtractXML;
+import com.muaaz.joosuf.encrypted.redditclient.RSSHandler.Parsers.XMLHandler;
 import com.muaaz.joosuf.encrypted.redditclient.RSSHandler.Post;
 import com.muaaz.joosuf.encrypted.redditclient.RSSHandler.XMLTags.Entry;
 import com.muaaz.joosuf.encrypted.redditclient.RSSHandler.XMLTags.Feed;
+import com.muaaz.joosuf.encrypted.redditclient.Utils.ItemClickSupport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,20 +27,27 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
-public class RSSToUserPageParser {
+public class User extends AppCompatActivity {
+
+    RecyclerView recyclerView;
+    Adapter adapter;
+
     private static final String TAG = "RSSToUserPage";
     private static final String BASE_URL = "https://www.reddit.com/user/";
-    ArrayList<Post> posts;
+    ArrayList<Post> posts = new ArrayList<>();
     private Context context;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.user);
 
-    public void run(String user_handle) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .build();
 
-
+        String user_handle = "5gears0chill";
         XMLHandler xmlHandlerSubReddit = retrofit.create(XMLHandler.class);
         Call<Feed> call = xmlHandlerSubReddit.getUserPageFeed(user_handle);
 
@@ -56,39 +72,25 @@ public class RSSToUserPageParser {
                         postContent.add(null);
 //                       Log.e(TAG, "onResponse: IndexOutOfBoundsException: " + e.getMessage());
                     }
-//                    posts.add(new Post(
-//                            entries.get(i).getTitle(),
-//                            entries.get(i).getAuthor().getName(),
-//                            entries.get(i).getUpdated(),
-//                            postContent.get(0),
-//                            postContent.get(postContent.size() - 1)
-//                    ));
-
-                    Log.d(TAG,"TITLE " + entries.get(i).getTitle());
-                    Log.d(TAG,"AUTHORS " + entries.get(i).getAuthor());
-                    Log.d(TAG,"GET UPDATED  " + entries.get(i).getUpdated());
-                    Log.d(TAG,"POST CONTENT " + postContent.get(0));
-                    Log.d(TAG,"THUMBNAIL URL " + postContent.get(postContent.size() - 1));
-                    Post post = new Post();
-
-                    post.setAuthor(entries.get(i).getAuthor().getName());
-                    post.setTitle(entries.get(i).getTitle());
-                    post.setDateUpdated(entries.get(i).getUpdated());
-                    post.setPostURL(postContent.get(0));
-                    post.setThumbnailURL(postContent.get(postContent.size() - 1));
-
-                    posts = new ArrayList<>();
-                    posts.add(post);
+                    String postURL = "";
+                    for(String url :postContent){
+                        if (url.contains("comments")){
+                            postURL = url;
+                            break;
+                        }else{
+                            postURL = null;
+                        }
+                    }
+                    posts.add(new Post(
+                            entries.get(i).getTitle(),
+                            entries.get(i).getAuthor().getName(),
+                            entries.get(i).getUpdated(),
+                            postURL,
+                            postContent.get(postContent.size() - 1)
+                    ));
 
                 }
-//                for (int j = 0; j < posts.size(); j++) {
-//                    Log.d(TAG, "onResponse: \n " +
-//                            "PostURL: " + posts.get(j).getPostURL() + "\n " +
-//                            "ThumbnailURL: " + posts.get(j).getThumbnailURL() + "\n " +
-//                            "Title: " + posts.get(j).getTitle() + "\n " +
-//                            "Author: " + posts.get(j).getAuthor() + "\n " +
-//                            "updated: " + posts.get(j).getDateUpdated() + "\n ");
-//                }
+                generateDataList(posts);
 
             }
 
@@ -99,11 +101,24 @@ public class RSSToUserPageParser {
             }
         });
     }
+
+
+
+    private void generateDataList(List<Post> posts) {
+        recyclerView = findViewById(R.id.user_recycler_view);
+        ItemClickSupport.addTo(recyclerView).setOnItemClickListener((recyclerView, position, v) -> {
+            Intent intent = new Intent(v.getContext(),Comments.class);
+            intent.putExtra("title",posts.get(position).getTitle());
+            intent.putExtra("author",posts.get(position).getAuthor());
+            intent.putExtra("dateUpdated",posts.get(position).getDateUpdated());
+            intent.putExtra("postURL",posts.get(position).getPostURL());
+            intent.putExtra("thumbnailURL",posts.get(position).getThumbnailURL());
+            v.getContext().startActivity(intent);
+        });
+        adapter = new Adapter(posts);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(User.this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+    }
+
 }
-
-
-
-
-
-
-

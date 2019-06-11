@@ -32,11 +32,20 @@ public class Entry implements Serializable{
 
     }
 
-    public Entry(String content, Author author, String title, String updated) {
+    public Entry(String content, Author author, String title, String updated,String id) {
         this.content = content;
         this.author = author;
         this.title = title;
         this.updated = updated;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getContent() {

@@ -1,4 +1,4 @@
-package com.muaaz.joosuf.encrypted.redditclient.Async;
+package com.muaaz.joosuf.encrypted.redditclient.Utils.Async;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
