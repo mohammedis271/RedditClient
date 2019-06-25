@@ -34,6 +34,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     //retrofit XML Simple Converter
     implementation 'com.squareup.retrofit2:converter-simplexml:2.6.0'
+    //retrofit Gson Simple Converter
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+
+    //recycler and card view implementations
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
+
 }

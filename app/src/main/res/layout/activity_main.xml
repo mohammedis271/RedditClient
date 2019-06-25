@@ -8,7 +8,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="user"
+        android:text="Comments"
         android:id="@+id/userbtn"
         android:layout_centerHorizontal="true"
         android:onClick="userIntent"/>
@@ -31,10 +31,10 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Comments"
+        android:text="Login"
         android:layout_below="@id/subredditbtn"
         android:id="@+id/commentsbtn"
         android:layout_centerInParent="true"
-        android:onClick="commentIntent"/>
+        android:onClick="loginIntent"/>
 
 </RelativeLayout>
