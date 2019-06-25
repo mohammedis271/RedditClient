@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">RedditClient</string>
     <string name="no_content">No Content</string>
+    <string name="CurrentModhash"> com.muaaz.joosuf.encrypted.redditclient.Activities.CurrentModhash</string>
+    <string name="CurrentUsername"> com.muaaz.joosuf.encrypted.redditclient.Activities.CurrentUsername</string>
+    <string name="CurrentCookie"> com.muaaz.joosuf.encrypted.redditclient.Activities.CurrentCookie</string>
 </resources>
